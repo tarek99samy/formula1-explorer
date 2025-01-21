@@ -6,10 +6,12 @@ This is a Formula 1 Explorer website that allows users to explore various aspect
 
 - **React**: A JavaScript library for building user interfaces.
 - **Vite**: A build tool that provides a fast development environment with Hot Module Replacement (HMR).
-- **ESLint**: A tool for identifying and fixing problems in JavaScript code.
-- **Babel**: A JavaScript compiler that allows you to use next-generation JavaScript.
 - **PrimeReact**: A rich open-source UI components for React applications. It comes along with **PrimeFlex** for ready-use CSS classes
 - **SASS**: A preprocessor scripting language that is interpreted or compiled into CSS.
+- **React Query**: A library for fetching, caching, and updating asynchronous data in React applications.
+- **Zustand**: A small, fast, and scalable state management library for React applications.
+- **ESLint**: A tool for identifying and fixing problems in JavaScript code.
+- **Babel**: A JavaScript compiler that allows you to use next-generation JavaScript.
 
 ## Setup
 
