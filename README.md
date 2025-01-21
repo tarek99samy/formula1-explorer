@@ -1,4 +1,4 @@
-# Formula 1 Explorer
+# [Formula 1 Explorer](https://formula1-explorer.vercel.app/)
 
 This is a Formula 1 Explorer website that allows users to explore various aspects of Formula 1 racing, including drivers, teams, and race results. The website is built using modern web technologies to ensure a fast and mobile-first responsive user experience.
 
@@ -35,7 +35,7 @@ To start the development server with Hot Module Replacement (HMR), run:
 npm run start
 ```
 
-This will start the Vite development server and you can view the website at `http://localhost:3000`.
+This will start the Vite development server and you can view the website at `http://localhost:5173`.
 
 ## Building for Production
 
