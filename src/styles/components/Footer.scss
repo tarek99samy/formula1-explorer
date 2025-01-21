@@ -1,0 +1,8 @@
+@use '../variables' as vars;
+@use '../mixins' as mixins;
+
+.footer {
+  @include mixins.navbar(static, null, null, 100%, unset, null, vars.$color-nav-bg-transparent, 'top', 1px, vars.$color-nav-border, 0);
+  @include mixins.flexArea(column, start, center);
+  gap: vars.$spacing-atomic;
+}

@@ -1,0 +1,52 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: white;
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.p-card-body {
+  width: 100%;
+  padding: 0;
+}
+
+.p-icon-field {
+  width: 100%;
+}
+
+.p-tabview-panels {
+  width: 100%;
+}
+
+.p-row-editor-save,
+.p-multiselect-panel .p-multiselect-header .p-checkbox {
+  margin: 0;
+}
