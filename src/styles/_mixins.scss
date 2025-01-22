@@ -32,9 +32,9 @@
 }
 
 @mixin text($color, $size, $weight, $lineHeight) {
+  color: $color;
   font-size: $size;
   font-weight: $weight;
-  color: $color;
   line-height: $lineHeight;
 }
 

@@ -2,6 +2,14 @@
 $color-nav-bg: rgba(70, 70, 100, 0.3);
 $color-nav-bg-transparent: rgba(0, 0, 0, 0.3);
 $color-nav-border: rgba(150, 150, 150, 0.5);
+$color-text-primary: #fff;
+$color-card-bg: rgb(92, 63, 74);
+$color-card-bg-heighlighted: rgb(115, 115, 189);
+
+$card-hover-shadow:
+  0px 9px 46px 8px rgba(115, 115, 189, 0.1),
+  0px 24px 38px 3px rgba(115, 115, 189, 0.1),
+  0px 11px 15px rgba(115, 115, 189, 0.1);
 
 //====================== SPACING (step = 4px = 0.25em) =========================
 $spacing-xxx-atomic: 0.25em; //					 4px
