@@ -35,17 +35,21 @@ const prepareRaces = (season, race, seasonPinnedRaces = []) => {
 };
 
 export async function getAllRaces({ limit, season, seasonPinnedRaces }) {
-  const response = await axiosClient.get(`/${season}/races.json?limit=${limit}`);
-  let sortedData = seasonPinnedRaces || [];
-  const filteredRaces = response.data.MRData.RaceTable.Races.filter((race) => !sortedData.find((pinnedRace) => pinnedRace.round === race.round));
-  sortedData = sortedData.concat(filteredRaces);
-  sortedData = sortedData.map((race) => prepareRaces(season, race, seasonPinnedRaces));
+  try {
+    const response = await axiosClient.get(`/${season}/races.json?limit=${limit}`);
+    let sortedData = seasonPinnedRaces || [];
+    const filteredRaces = response.data.MRData.RaceTable.Races.filter((race) => !sortedData.find((pinnedRace) => pinnedRace.round === race.round));
+    sortedData = sortedData.concat(filteredRaces);
+    sortedData = sortedData.map((race) => prepareRaces(season, race, seasonPinnedRaces));
 
-  const formattedData = {
-    MRData: {
-      ...response.data.MRData,
-      data: sortedData
-    }
-  };
-  return formattedData;
+    const formattedData = {
+      MRData: {
+        ...response.data.MRData,
+        data: sortedData
+      }
+    };
+    return formattedData;
+  } catch (error) {
+    throw `Error while fetching races: ${error?.message || 'internal error'}`;
+  }
 }

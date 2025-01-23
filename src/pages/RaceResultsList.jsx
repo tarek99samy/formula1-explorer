@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from 'primereact/button';
-import { getAllRaceResults } from '../api/race-result.api';
+import { getAllRaceResults, getDriversPerformance } from '../api/race-result.api';
 import CardsList from '../components/CardsList';
 import PerformanceModal from '../components/PerformanceModal';
 
@@ -18,7 +18,9 @@ export default function RaceResultsList() {
       <PerformanceModal
         visible={showPerformanceModal}
         setVisible={setShowPerformanceModal}
-        data={{ type: 'pie', data: { labels: [], datasets: [{ data: [] }] }, options: {} }}
+        queryKey='performance-visualization'
+        queryFunction={getDriversPerformance}
+        queryFunctionParams={{ season, round }}
       />
       <CardsList
         title='Results Standings'

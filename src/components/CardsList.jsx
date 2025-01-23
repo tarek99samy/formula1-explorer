@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { SelectButton } from 'primereact/selectbutton';
 import { Dropdown } from 'primereact/dropdown';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 import Card from './Card';
 import LoadingSkeleton from './LoadingSkeleton';
 import '../styles/components/CardsList.scss';
@@ -36,14 +37,21 @@ export default function CardsList({
   canHeighlight = false,
   canPin = false
 }) {
+  const toast = useRef(null);
   const [currentViewType, setCurrentViewType] = useState('grid');
   const [currentLimit, setCurrentLimit] = useState(pageStep);
   const [selectedId, setSelectedId] = useState(null);
   const [showLoadMore, setShowLoadMore] = useState(false);
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: [queryKey, currentLimit, { ...queryFunctionParams }],
     queryFn: () => queryFunction({ limit: currentLimit, ...queryFunctionParams })
   });
+
+  useEffect(() => {
+    if (error) {
+      toast.current.show({ severity: 'error', summary: 'Error', detail: error, life: 3000 });
+    }
+  }, [error]);
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -70,6 +78,7 @@ export default function CardsList({
 
   return (
     <main className='flex flex-column gap-3 w-full'>
+      <Toast ref={toast} />
       <div className='flex justify-content-between'>
         <h1 className='text-white'>{title}</h1>
         <div className='flex align-items-center gap-3'>
