@@ -7,17 +7,19 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   className: PropTypes.string.isRequired,
-  bodyMetadata: PropTypes.arrayOf({
-    type: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    url: PropTypes.string
-  }).isRequired,
+  bodyMetadata: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      url: PropTypes.string
+    })
+  ).isRequired,
   detailsUrl: PropTypes.string.isRequired,
   isHeighlighted: PropTypes.bool,
   haveFooter: PropTypes.bool,
   footerMetadata: PropTypes.shape({
-    onClick: PropTypes.func,
-    disabled: PropTypes.bool
+    savePreference: PropTypes.func,
+    removePreference: PropTypes.func
   })
 };
 
@@ -33,7 +35,7 @@ export default function Card({
 }) {
   const formatDate = (date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(date).toLocaleDateString(null, options);
+    return new Date(date).toLocaleDateString('en-US', options);
   };
 
   const renderBody = (bodyItem, index) => {
@@ -69,12 +71,17 @@ export default function Card({
       </div>
       <div className='card__body'>{bodyMetadata.map((bodyItem, index) => renderBody(bodyItem, index))}</div>
       <div className='card__footer'>
-        {haveFooter && (
-          <Button label='Pin' icon='pi pi-thumbtack' onClick={footerMetadata.onClick} disabled={footerMetadata.disabled} severity='danger' />
+        {haveFooter &&
+          (isHeighlighted ? (
+            <Button label='Unpin' icon='pi pi-thumbtack' onClick={() => footerMetadata.removePreference()} severity='secondary' />
+          ) : (
+            <Button label='Pin' icon='pi pi-thumbtack' onClick={() => footerMetadata.savePreference()} severity='danger' />
+          ))}
+        {detailsUrl && (
+          <Link to={detailsUrl} className='card__footer__link'>
+            <Button label='Learn More' icon='pi pi-eye' severity='secondary' />
+          </Link>
         )}
-        <Link to={detailsUrl} className='card__footer__link'>
-          <Button label='View More' icon='pi pi-eye' severity='secondary' />
-        </Link>
       </div>
     </div>
   );

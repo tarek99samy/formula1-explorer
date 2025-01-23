@@ -16,8 +16,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/seasons' element={<SeasonsList />} />
-        <Route path='/races/:year' element={<RacesList />} />
-        <Route path='/results/:year/:round' element={<RaceResultsList />} />
+        <Route path='/races/:season' element={<RacesList />} />
+        <Route path='/results/:season/:round' element={<RaceResultsList />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

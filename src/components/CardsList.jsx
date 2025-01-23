@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { SelectButton } from 'primereact/selectbutton';
 import { Dropdown } from 'primereact/dropdown';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Button } from 'primereact/button';
 import Card from './Card';
 import LoadingSkeleton from './LoadingSkeleton';
@@ -12,6 +12,7 @@ CardsList.propTypes = {
   title: PropTypes.string.isRequired,
   queryKey: PropTypes.string.isRequired,
   queryFunction: PropTypes.func.isRequired,
+  queryFunctionParams: PropTypes.object,
   pageStep: PropTypes.number,
   canHeighlight: PropTypes.bool,
   canPin: PropTypes.bool
@@ -26,15 +27,29 @@ const viewTypeClassName = {
   grid: { parent: 'grid gap-5', child: 'col-12 sm:col-6 md:col-5 lg:col-3' }
 };
 
-export default function CardsList({ title, queryKey, queryFunction, pageStep = 10, canHeighlight = false, canPin = false }) {
-  const queryClient = useQueryClient();
+export default function CardsList({
+  title,
+  queryKey,
+  queryFunction,
+  queryFunctionParams = {},
+  pageStep = 10,
+  canHeighlight = false,
+  canPin = false
+}) {
   const [currentViewType, setCurrentViewType] = useState('grid');
-  const [currentOffset, setCurrentOffset] = useState(pageStep);
+  const [currentLimit, setCurrentLimit] = useState(pageStep);
   const [selectedId, setSelectedId] = useState(null);
+  const [showLoadMore, setShowLoadMore] = useState(false);
   const { data, isLoading } = useQuery({
-    queryKey: [queryKey, currentOffset],
-    queryFn: () => queryFunction(currentOffset, 0)
+    queryKey: [queryKey, currentLimit, { ...queryFunctionParams }],
+    queryFn: () => queryFunction({ limit: currentLimit, ...queryFunctionParams })
   });
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      setShowLoadMore(data.MRData.total > currentLimit);
+    }
+  }, [isLoading, data, currentLimit]);
 
   const renderToggleViewButton = (option) => <i className={option.icon}></i>;
 
@@ -50,7 +65,7 @@ export default function CardsList({ title, queryKey, queryFunction, pageStep = 1
   };
 
   const handleLoadMore = () => {
-    setCurrentOffset(currentOffset + pageStep);
+    setCurrentLimit(currentLimit + pageStep);
   };
 
   return (
@@ -68,7 +83,7 @@ export default function CardsList({ title, queryKey, queryFunction, pageStep = 1
           {canHeighlight && (
             <div className='flex flex-column gap-2'>
               <label>Select to heighlight</label>
-              <Dropdown value={selectedId} onChange={handleChangeHeighlight} options={data.heighlightOptions | []} />
+              <Dropdown value={selectedId} onChange={handleChangeHeighlight} options={data?.heighlightOptions | []} />
             </div>
           )}
         </div>
@@ -80,9 +95,9 @@ export default function CardsList({ title, queryKey, queryFunction, pageStep = 1
           data?.MRData?.data.map((item) => <Card key={item.id} className={viewTypeClassName[currentViewType].child} haveFooter={canPin} {...item} />)
         )}
       </div>
-      {!isLoading && data?.MRData?.limit + data?.MRData?.offset < data?.MRData?.total ? (
+      {showLoadMore ? (
         <div className='flex justify-content-center pt-5'>
-          <Button label='Load More' icon='pi pi-refresh' onClick={handleLoadMore} />
+          <Button label='Load More' icon='pi pi-refresh' className='w-4' onClick={handleLoadMore} />
         </div>
       ) : null}
     </main>

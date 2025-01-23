@@ -3,7 +3,7 @@
 
 .card {
   @include mixins.flexArea(column, center, center);
-  gap: vars.$spacing-atomic;
+  gap: vars.$spacing-atomic-xxx;
   padding: vars.$spacing-x-atomic;
   border: 1px solid vars.$color-nav-border;
   border-radius: vars.$spacing-x-atomic;
@@ -20,25 +20,26 @@
   }
 
   &__header {
-    @include mixins.flexArea(row, start, start);
-    gap: vars.$spacing-atomic;
+    @include mixins.flexArea(column, start, start);
+    gap: vars.$spacing-xxx-atomic;
     width: 100%;
 
     .card__title {
-      @include mixins.text(vars.$color-text-primary, vars.$text-size-large, vars.$text-weight-bold, null);
+      @include mixins.text(vars.$color-text-primary, vars.$text-size-small, vars.$text-weight-bold, vars.$text-size-small);
     }
 
     .card__subtitle {
-      @include mixins.text(vars.$color-text-primary, vars.$text-size-medium, vars.$text-weight-semi-bold, null);
+      @include mixins.text(vars.$color-text-primary, vars.$text-size-x-small, vars.$text-weight-semi-bold, vars.$text-size-x-small);
     }
   }
 
   &__body {
     @include mixins.flexArea(column, start, start);
+    gap: vars.$spacing-atomic;
     width: 100%;
 
     &__item {
-      @include mixins.text(vars.$color-text-primary, vars.$text-size-small, vars.$text-weight-normal, null);
+      @include mixins.text(vars.$color-text-primary, vars.$text-size-micro-x, vars.$text-weight-normal, vars.$text-size-micro-x);
     }
   }
 

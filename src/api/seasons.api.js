@@ -1,7 +1,7 @@
 import axiosClient from '../utils/AxiosClient';
 
-export async function getAllSeasons(limit, offset) {
-  const response = await axiosClient.get(`/seasons.json?limit=${limit}&offset=${offset}`);
+export async function getAllSeasons(params) {
+  const response = await axiosClient.get(`/seasons.json?limit=${params.limit}`);
   const formattedData = {
     MRData: {
       ...response.data.MRData,
