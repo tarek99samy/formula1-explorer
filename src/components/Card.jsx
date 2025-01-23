@@ -14,7 +14,7 @@ Card.propTypes = {
       url: PropTypes.string
     })
   ).isRequired,
-  detailsUrl: PropTypes.string.isRequired,
+  detailsUrl: PropTypes.string,
   isHeighlighted: PropTypes.bool,
   haveFooter: PropTypes.bool,
   footerMetadata: PropTypes.shape({

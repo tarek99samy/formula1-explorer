@@ -73,6 +73,7 @@ export default function CardsList({
       <div className='flex justify-content-between'>
         <h1 className='text-white'>{title}</h1>
         <div className='flex align-items-center gap-3'>
+          {canHeighlight && <Dropdown value={selectedId} onChange={handleChangeHeighlight} options={[]} placeholder='Select to highlight' />}
           <SelectButton
             value={currentViewType}
             onChange={handleChangeViewType}
@@ -80,12 +81,6 @@ export default function CardsList({
             optionLabel='value'
             options={viewTypes}
           />
-          {canHeighlight && (
-            <div className='flex flex-column gap-2'>
-              <label>Select to heighlight</label>
-              <Dropdown value={selectedId} onChange={handleChangeHeighlight} options={data?.heighlightOptions | []} />
-            </div>
-          )}
         </div>
       </div>
       <div className={viewTypeClassName[currentViewType].parent}>

@@ -9,7 +9,13 @@ import RaceResultsList from './pages/RaceResultsList';
 import NotFound from './pages/NotFound';
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false
+      }
+    }
+  });
   return (
     <QueryClientProvider client={queryClient}>
       <Navbar />
