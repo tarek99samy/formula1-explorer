@@ -1,8 +1,10 @@
+@use './variables' as vars;
+@use './mixins' as mixins;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: white;
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -31,22 +33,4 @@ a {
 
 a:hover {
   text-decoration: none;
-}
-
-.p-card-body {
-  width: 100%;
-  padding: 0;
-}
-
-.p-icon-field {
-  width: 100%;
-}
-
-.p-tabview-panels {
-  width: 100%;
-}
-
-.p-row-editor-save,
-.p-multiselect-panel .p-multiselect-header .p-checkbox {
-  margin: 0;
 }

@@ -1,6 +1,6 @@
+import '../styles/components/Navbar.scss';
 import { Link } from 'react-router-dom';
 import { Menubar } from 'primereact/menubar';
-import '../styles/components/Navbar.scss';
 
 export default function Navbar() {
   const itemRenderer = (item) => (

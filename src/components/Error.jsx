@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
 
-export default function NotFound() {
+export default function Error() {
   return (
     <main className='flex flex-column align-items-center justify-content-center text-center p-4 h-screen'>
-      <img src='/404.svg' alt='Page Not Found' className='w-4' />
-      <h1>Page Not Found</h1>
-      <h2>Sorry, the page you are looking for does not exist.</h2>
+      <img src='/error.svg' alt='Error' />
+      <h1>Unexpected Error</h1>
+      <h2>Something went wrong, please try again</h2>
       <Link to='/'>
         <Button label='Go back to Home' />
       </Link>

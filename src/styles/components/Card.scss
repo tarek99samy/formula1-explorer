@@ -2,7 +2,7 @@
 @use '../mixins' as mixins;
 
 .card {
-  @include mixins.flexArea(column, center, center);
+  @include mixins.flexArea(column, center, space-between);
   gap: vars.$spacing-atomic-xxx;
   padding: vars.$spacing-x-atomic;
   border: 1px solid vars.$color-nav-border;
@@ -44,8 +44,8 @@
   }
 
   &__footer {
-    @include mixins.flexArea(row, start, space-evenly);
-    gap: vars.$spacing-atomic;
+    @include mixins.flexArea(column, center, center);
+    gap: vars.$spacing-x-atomic;
     width: 100%;
   }
 }

@@ -8,10 +8,9 @@ export default function RacesList() {
   const pinnedRaces = useUserPreferenceStore((state) => state.pinnedRaces);
 
   return (
-    <main className='flex flex-column align-items-center py-8 px-4 md:px-5 lg:px-8'>
-      <h1>Listing races of {season}</h1>
+    <main className='flex flex-column align-items-center py-8 px-4 md:px-5 lg:px-8 h-full'>
       <CardsList
-        title='Season Races Listing'
+        title={`Listing races of ${season}`}
         queryKey='races'
         queryFunction={getAllRaces}
         queryFunctionParams={{ season, seasonPinnedRaces: pinnedRaces[season] }}

@@ -1,13 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import '../styles/components/CardsList.scss';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { SelectButton } from 'primereact/selectbutton';
-import { Dropdown } from 'primereact/dropdown';
+import { MultiSelect } from 'primereact/multiselect';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import Card from './Card';
 import LoadingSkeleton from './LoadingSkeleton';
-import '../styles/components/CardsList.scss';
+import Error from './Error';
+import { viewTypeClassName, CardsListViewTypes } from '../utils/components/CardsList.utils';
 
 CardsList.propTypes = {
   title: PropTypes.string.isRequired,
@@ -15,17 +17,9 @@ CardsList.propTypes = {
   queryFunction: PropTypes.func.isRequired,
   queryFunctionParams: PropTypes.object,
   pageStep: PropTypes.number,
+  highlighOptions: PropTypes.array,
   canHeighlight: PropTypes.bool,
   canPin: PropTypes.bool
-};
-
-const viewTypes = [
-  { value: 'grid', icon: 'pi pi-th-large' },
-  { value: 'list', icon: 'pi pi-bars' }
-];
-const viewTypeClassName = {
-  list: { parent: 'flex flex-column w-full gap-5', child: 'flex flex-column w-full' },
-  grid: { parent: 'grid gap-5', child: 'col-12 sm:col-6 md:col-5 lg:col-3' }
 };
 
 export default function CardsList({
@@ -34,24 +28,19 @@ export default function CardsList({
   queryFunction,
   queryFunctionParams = {},
   pageStep = 10,
+  highlighOptions = [],
   canHeighlight = false,
   canPin = false
 }) {
   const toast = useRef(null);
   const [currentViewType, setCurrentViewType] = useState('grid');
   const [currentLimit, setCurrentLimit] = useState(pageStep);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedIds, setSelectedIds] = useState([]);
   const [showLoadMore, setShowLoadMore] = useState(false);
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [queryKey, currentLimit, { ...queryFunctionParams }],
     queryFn: () => queryFunction({ limit: currentLimit, ...queryFunctionParams })
   });
-
-  useEffect(() => {
-    if (error) {
-      toast.current.show({ severity: 'error', summary: 'Error', detail: error, life: 3000 });
-    }
-  }, [error]);
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -69,26 +58,32 @@ export default function CardsList({
   };
 
   const handleChangeHeighlight = (e) => {
-    setSelectedId(e.value);
+    setSelectedIds(e.value);
   };
 
   const handleLoadMore = () => {
     setCurrentLimit(currentLimit + pageStep);
   };
 
+  if (isError) {
+    return <Error />;
+  }
+
   return (
     <main className='flex flex-column gap-3 w-full'>
       <Toast ref={toast} />
-      <div className='flex justify-content-between'>
+      <div className='flex flex-column md:flex-row justify-content-between'>
         <h1 className='text-white'>{title}</h1>
         <div className='flex align-items-center gap-3'>
-          {canHeighlight && <Dropdown value={selectedId} onChange={handleChangeHeighlight} options={[]} placeholder='Select to highlight' />}
+          {canHeighlight && (
+            <MultiSelect value={selectedIds} onChange={handleChangeHeighlight} options={highlighOptions} placeholder='Select to highlight' />
+          )}
           <SelectButton
             value={currentViewType}
             onChange={handleChangeViewType}
             itemTemplate={renderToggleViewButton}
             optionLabel='value'
-            options={viewTypes}
+            options={CardsListViewTypes}
           />
         </div>
       </div>
@@ -101,7 +96,7 @@ export default function CardsList({
       </div>
       {showLoadMore ? (
         <div className='flex justify-content-center pt-5'>
-          <Button label='Load More' icon='pi pi-refresh' className='w-4' onClick={handleLoadMore} />
+          <Button label='Load More' icon='pi pi-refresh' className='w-10 md:w-5 lg:w-4' onClick={handleLoadMore} />
         </div>
       ) : null}
     </main>
