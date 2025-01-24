@@ -1,5 +1,6 @@
+import useUserPreferenceStore from '../store/UserPreference.store';
 import axiosClient from '../utils/AxiosClient';
-import { getChartsPrepared, prepareRaceResults } from '../utils/api/race-result.utils';
+import { getChartsPrepared, prepareDrivers, prepareRaceResults } from '../utils/api/race-result.utils';
 
 export async function getAllRaceResults({ limit = null, season, round, skipFormat = false }) {
   try {
@@ -12,6 +13,8 @@ export async function getAllRaceResults({ limit = null, season, round, skipForma
       return response.data.MRData.RaceTable.Races[0].Results;
     }
     const preparedData = response.data.MRData.RaceTable.Races[0].Results.map(prepareRaceResults);
+    const driversList = response.data.MRData.RaceTable.Races[0].Results.map(prepareDrivers);
+    useUserPreferenceStore.setState({ currentDrivers: driversList });
     const formatedData = {
       MRData: {
         ...response.data.MRData,

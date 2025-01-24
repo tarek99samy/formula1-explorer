@@ -1,3 +1,4 @@
+import '../styles/components/PerformanceModal.scss';
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from '@tanstack/react-query';
@@ -21,8 +22,8 @@ const renderChart = (chartObject, index, data) => {
     return null;
   }
   return (
-    <div className='w-full my-3' key={chartObject.data.datasets[0].label} data-testid='performance-modal-chart'>
-      <span className='text-lg'>{chartObject.data.datasets[0].label}</span>
+    <div className='performance-modal__chart' key={chartObject.data.datasets[0].label} data-testid='performance-modal-chart'>
+      <span className='performance-modal__chart__title'>{chartObject.data.datasets[0].label}</span>
       <Chart type={chartObject.type} data={chartObject.data} options={chartObject.options} />
       {index !== data.length - 1 && <Divider />}
     </div>
@@ -46,12 +47,12 @@ function PerformanceModal({ visible, setVisible, queryKey, queryFunction, queryF
       <Dialog
         header='Performance Charts'
         visible={visible}
-        className='w-11 lg:w-8'
+        className='performance-modal'
         onHide={() => setVisible(false)}
         draggable={false}
         resizable={false}
       >
-        <div className='flex flex-column justify-content-center gap-3 w-full'>
+        <div className='performance-modal__container'>
           {isLoading ? <ProgressSpinner data-testid='performance-modal-spinner' /> : data.map((item, index) => renderChart(item, index, data))}
         </div>
       </Dialog>

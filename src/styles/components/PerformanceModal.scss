@@ -1,0 +1,21 @@
+@use '../variables' as vars;
+@use '../mixins' as mixins;
+
+.performance-modal {
+  @include mixins.responsive-width(90%, 80%, 80%, 80%);
+
+  &__container {
+    @include mixins.flexArea(column, center, center);
+    @include mixins.width(100%);
+    @include mixins.gap(vars.$spacing-atomic-xx);
+
+    .performance-modal__chart {
+      @include mixins.width(100%);
+      @include mixins.margin(vars.$spacing-atomic-xx, 0);
+
+      &__title {
+        @include mixins.text(vars.$color-text-primary, vars.$text-size-medium, vars.$text-weight-bold, vars.$text-size-medium);
+      }
+    }
+  }
+}

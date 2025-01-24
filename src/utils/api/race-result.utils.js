@@ -28,6 +28,11 @@ export const prepareRaceResults = (result) => {
   };
 };
 
+export const prepareDrivers = (result) => ({
+  value: result.Driver.driverId,
+  label: `${result.Driver.givenName}, ${result.Driver.familyName}`
+});
+
 const calculateYAxisRange = (data, padding = 10) => {
   const minValue = Math.min(...data);
   const maxValue = Math.max(...data);

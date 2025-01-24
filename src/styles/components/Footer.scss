@@ -4,5 +4,22 @@
 .footer {
   @include mixins.navbar(static, null, null, 100%, unset, null, vars.$color-nav-bg-transparent, 'top', 1px, vars.$color-nav-border, 0);
   @include mixins.flexArea(column, start, center);
-  gap: vars.$spacing-atomic;
+  @include mixins.padding(vars.$spacing-micro, vars.$spacing-micro-increased);
+  @include mixins.x-responsive-padding(vars.$spacing-atomic-increased, vars.$spacing-micro-increased, vars.$spacing-micro-increased);
+  @include mixins.gap(vars.$spacing-micro);
+
+  &__container {
+    @include mixins.flexArea(column, start, start);
+    @include mixins.responsive-flexArea(row, start, start, 'md');
+    @include mixins.width(100%);
+
+    .footer__logo {
+      @include mixins.responsive-width(40%, 20%, 15%, 10%);
+    }
+
+    .footer__title {
+      @include mixins.text(vars.$color-text-primary, vars.$text-size-medium, vars.$text-weight-bold, vars.$text-size-medium);
+      @include mixins.responsive-text(vars.$text-size-small, vars.$text-size-medium, vars.$text-size-medium, vars.$text-size-medium);
+    }
+  }
 }

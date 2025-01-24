@@ -4,9 +4,9 @@ import { Menubar } from 'primereact/menubar';
 
 export default function Navbar() {
   const itemRenderer = (item) => (
-    <Link to={item.url} className='flex align-items-center p-menuitem-link'>
+    <Link to={item.url} className='navbar__item p-menuitem-link'>
       <i className={`${item.icon} p-menuitem-icon`} />
-      <span className='p-menuitem-text text-base'>{item.label}</span>
+      <span className='p-menuitem-text'>{item.label}</span>
     </Link>
   );
   const items = [
@@ -32,7 +32,7 @@ export default function Navbar() {
 
   const start = (
     <Link to='/'>
-      <img alt='logo' src='/F1.svg' height='40' className='mr-2' />
+      <img alt='logo' src='/F1.svg' className='navbar__logo' />
     </Link>
   );
 

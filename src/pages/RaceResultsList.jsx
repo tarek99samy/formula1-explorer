@@ -4,14 +4,16 @@ import { Button } from 'primereact/button';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { getAllRaceResults, getDriversPerformance } from '../api/race-result.api';
 import CardsList from '../components/CardsList';
+import useUserPreferenceStore from '../store/UserPreference.store';
 const PerformanceModal = lazy(() => import('../components/PerformanceModal'));
 
 export default function RaceResultsList() {
   const { season, round } = useParams();
   const [showPerformanceModal, setShowPerformanceModal] = useState(false);
+  const currentDrivers = useUserPreferenceStore((state) => state.currentDrivers);
 
   return (
-    <main className='flex flex-column align-items-center py-8 px-4 md:px-5 lg:px-8 h-full'>
+    <main className='page-container'>
       <Button label='See Performance Visualization' icon='pi pi-chart-bar' onClick={() => setShowPerformanceModal(true)} />
       <Suspense fallback={<ProgressSpinner />}>
         {showPerformanceModal && (
@@ -29,6 +31,7 @@ export default function RaceResultsList() {
         queryKey='results'
         queryFunction={getAllRaceResults}
         queryFunctionParams={{ season, round }}
+        highlighOptions={currentDrivers}
         canHeighlight={true}
       />
     </main>

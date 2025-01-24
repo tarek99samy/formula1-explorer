@@ -1,4 +1,5 @@
 //====================== COLORS ==========================
+$color-bg: #242424;
 $color-nav-bg: rgba(70, 70, 100, 0.3);
 $color-nav-bg-transparent: rgba(0, 0, 0, 0.3);
 $color-nav-border: rgba(150, 150, 150, 0.5);
@@ -10,6 +11,25 @@ $card-hover-shadow:
   0px 9px 46px 8px rgba(115, 115, 189, 0.1),
   0px 24px 38px 3px rgba(115, 115, 189, 0.1),
   0px 11px 15px rgba(115, 115, 189, 0.1);
+
+//====================== BREAK POINTS =========================
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+$grid-column-1: 8.3333%;
+$grid-column-2: 16.6667%;
+$grid-column-3: 25%;
+$grid-column-4: 33.3333%;
+$grid-column-5: 41.6667%;
+$grid-column-6: 50%;
+$grid-column-7: 58.3333%;
+$grid-column-8: 66.6667%;
+$grid-column-9: 75%;
+$grid-column-10: 83.3333%;
+$grid-column-11: 91.6667%;
+$grid-column-12: 100%;
 
 //====================== SPACING (step = 4px = 0.25em) =========================
 $spacing-xxx-atomic: 0.25em; //					 4px
@@ -59,6 +79,7 @@ $spacing-large-increased: 10em; //				 160px
 $spacing-large-increased-x: 11em; //				 176px
 $spacing-large-increased-xx: 11.25em; //				 176px
 
+$card-button-max-width: 18em;
 //====================== TEXT ============================
 $text-size-x-atomic: 0.5em; //					 8px
 $text-size-atomic: 0.625em; //					 10px
@@ -90,3 +111,5 @@ $text-weight-bold: bold;
 $text-weight-semi-bold: 600;
 $text-weight-normal: normal;
 $text-weight-light: 300;
+
+$text-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

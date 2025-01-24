@@ -2,4 +2,53 @@
 @use '../mixins' as mixins;
 
 .cardslist {
+  @include mixins.flexArea(column, stretch, center);
+  @include mixins.width(100%);
+  @include mixins.gap(vars.$spacing-atomic-xx);
+
+  &__header {
+    @include mixins.flexArea(column, stretch, center);
+    @include mixins.responsive-flexArea(row, stretch, space-between, 'lg');
+    &__title {
+      @include mixins.text(vars.$color-text-primary, vars.$text-size-medium, vars.$text-weight-bold, vars.$text-size-medium);
+      @include mixins.responsive-text(vars.$text-size-small, vars.$text-size-x-medium, vars.$text-size-medium, vars.$text-size-large);
+    }
+
+    &__actions {
+      @include mixins.flexArea(column, start, space-between);
+      @include mixins.responsive-flexArea(row, center, space-between, 'sm');
+      @include mixins.gap(vars.$spacing-atomic);
+    }
+  }
+
+  &__body {
+    @include mixins.gap(vars.$spacing-atomic);
+
+    &--list {
+      @include mixins.flexArea(column, start, start);
+      @include mixins.width(100%);
+    }
+
+    &--grid {
+      @include mixins.gridArea();
+    }
+
+    &__item--list {
+      @include mixins.flexArea(column, start, start);
+      @include mixins.width(100%);
+    }
+
+    &__item--grid {
+      @include mixins.gridArea-column(vars.$grid-column-12, vars.$grid-column-5, vars.$grid-column-5, vars.$grid-column-3, vars.$grid-column-2);
+    }
+  }
+
+  &__footer {
+    @include mixins.flexArea(row, center, center);
+    @include mixins.padding(vars.$spacing-atomic-increased, 0);
+
+    &__button {
+      @include mixins.responsive-width(100%, 50%, 40%, 30%);
+    }
+  }
 }

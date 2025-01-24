@@ -1,0 +1,25 @@
+@use '../variables' as vars;
+@use '../mixins' as mixins;
+
+.loading-skeleton {
+  @include mixins.flexArea(column, stretch, center);
+  @include mixins.width(100%);
+  @include mixins.gap(vars.$spacing-atomic-xx);
+
+  &__row {
+    @include mixins.flexArea(row, start, start);
+    @include mixins.gap(vars.$spacing-atomic-xx);
+
+    .loading-skeleton__container {
+      @include mixins.padding(vars.$spacing-xxx-atomic, vars.$spacing-xxx-atomic);
+      @include mixins.border(1px, vars.$color-card-bg, 0);
+      @include mixins.width(100%);
+
+      &__headers {
+        @include mixins.flexArea(column, stretch, center);
+        @include mixins.margin(vars.$spacing-xx-atomic, 0);
+        @include mixins.gap(vars.$spacing-xx-atomic);
+      }
+    }
+  }
+}

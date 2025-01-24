@@ -1,3 +1,5 @@
+@use './variables' as vars;
+
 @mixin navbar($position, $top, $bottom, $width, $padding, $margin, $backgroundColor, $borderPlace, $borderThickness, $borderColor, $borderRadius) {
   position: $position;
   top: $top;
@@ -31,6 +33,63 @@
   justify-content: $justifyContent;
 }
 
+@mixin responsive-flexArea($direction, $alignItems, $justifyContent, $breakpoint) {
+  @if $breakpoint == 'sm' {
+    @media (min-width: vars.$breakpoint-sm) {
+      flex-direction: $direction;
+      align-items: $alignItems;
+      justify-content: $justifyContent;
+    }
+  } @else if $breakpoint == 'md' {
+    @media (min-width: vars.$breakpoint-md) {
+      flex-direction: $direction;
+      align-items: $alignItems;
+      justify-content: $justifyContent;
+    }
+  } @else if $breakpoint == 'lg' {
+    @media (min-width: vars.$breakpoint-lg) {
+      flex-direction: $direction;
+      align-items: $alignItems;
+      justify-content: $justifyContent;
+    }
+  }
+}
+
+@mixin gridArea() {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@mixin gridArea-column($default, $sm: 'none', $md: 'none', $lg: 'none', $xl: 'none') {
+  width: $default;
+
+  @if $sm != 'none' {
+    @media (min-width: vars.$breakpoint-sm) {
+      width: $sm;
+    }
+  }
+  @if $md != 'none' {
+    @media (min-width: vars.$breakpoint-md) {
+      width: $md;
+    }
+  }
+  @if $lg != 'none' {
+    @media (min-width: vars.$breakpoint-lg) {
+      width: $lg;
+    }
+  }
+  @if $xl != 'none' {
+    @media (min-width: vars.$breakpoint-xl) {
+      width: $xl;
+    }
+  }
+}
+
+@mixin gap($value) {
+  gap: $value;
+}
+
 @mixin text($color, $size, $weight, $lineHeight) {
   color: $color;
   font-size: $size;
@@ -38,44 +97,109 @@
   line-height: $lineHeight;
 }
 
-@mixin area($display, $position, $width, $height, $padding, $margin, $backgroundColor) {
-  display: $display;
-  position: $position;
-  width: $width;
-  height: $height;
-  padding: $padding;
-  margin: $margin;
-  background-color: $backgroundColor;
+@mixin responsive-text($default, $md: 'none', $lg: 'none', $xl: 'none') {
+  font-size: $default;
+
+  @if $md != 'none' {
+    @media (min-width: vars.$breakpoint-md) {
+      font-size: $md;
+    }
+  }
+
+  @if $lg != 'none' {
+    @media (min-width: vars.$breakpoint-lg) {
+      font-size: $lg;
+    }
+  }
+
+  @if $xl != 'none' {
+    @media (min-width: vars.$breakpoint-xl) {
+      font-size: $xl;
+    }
+  }
 }
 
-@mixin borderedArea($borderThickness, $borderColor, $borderRadius) {
+@mixin height($value) {
+  height: $value;
+}
+
+@mixin width($value) {
+  width: $value;
+}
+
+@mixin responsive-width($value, $md: 'none', $lg: 'none', $xl: 'none') {
+  width: $value;
+
+  @if $md != 'none' {
+    @media (min-width: vars.$breakpoint-md) {
+      width: $md;
+    }
+  }
+
+  @if $lg != 'none' {
+    @media (min-width: vars.$breakpoint-lg) {
+      width: $lg;
+    }
+  }
+
+  @if $xl != 'none' {
+    @media (min-width: vars.$breakpoint-xl) {
+      width: $xl;
+    }
+  }
+}
+
+@mixin padding($py, $px) {
+  padding: $py $px;
+}
+
+@mixin margin($my, $mx) {
+  padding: $my $mx;
+}
+
+@mixin x-responsive-padding($default, $md: 'none', $lg: 'none') {
+  padding-left: $default;
+  padding-right: $default;
+
+  @if $md != 'none' {
+    @media (min-width: vars.$breakpoint-md) {
+      padding-left: $md;
+      padding-right: $md;
+    }
+  }
+
+  @if $lg != 'none' {
+    @media (min-width: vars.$breakpoint-lg) {
+      padding-left: $lg;
+      padding-right: $lg;
+    }
+  }
+}
+
+@mixin y-responsive-padding($default, $md: 'none', $lg: 'none') {
+  padding-top: $default;
+  padding-bottom: $default;
+
+  @if $md != 'none' {
+    @media (min-width: vars.$breakpoint-md) {
+      padding-top: $md;
+      padding-bottom: $md;
+    }
+  }
+
+  @if $lg != 'none' {
+    @media (min-width: vars.$breakpoint-lg) {
+      padding-top: $lg;
+      padding-bottom: $lg;
+    }
+  }
+}
+
+@mixin text-align($value) {
+  text-align: $value;
+}
+
+@mixin border($borderThickness, $borderColor, $borderRadius) {
   border: $borderThickness solid $borderColor;
   border-radius: $borderRadius;
-}
-
-@mixin gridArea($direction, $gap, $autoColumns, $templateRows, $templateColumns) {
-  display: grid;
-  grid-gap: $gap;
-  grid-auto-flow: $direction;
-  grid-auto-columns: $autoColumns;
-  grid-template-rows: minmax($templateRows, 1fr);
-  grid-template-columns: $templateColumns;
-}
-
-@mixin divider($height: 1px, $color, $width) {
-  border-top: $height solid $color;
-  width: $width;
-}
-
-@mixin button($bg-color, $fg-color, $border-radius, $border-thickness, $border-color, $hover-bg-color) {
-  background-color: $bg-color;
-  color: $fg-color;
-  border-radius: $border-radius;
-  border: $border-thickness solid $border-color;
-  cursor: pointer;
-  transition: 300ms all ease-in-out;
-
-  &:hover {
-    background-color: $hover-bg-color;
-  }
 }

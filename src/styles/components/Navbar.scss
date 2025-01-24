@@ -5,4 +5,12 @@
   @include mixins.navbar(fixed, 0, null, 100%, null, null, vars.$color-nav-bg, 'bottom', 1px, vars.$color-nav-border, 0);
   backdrop-filter: blur(6px);
   z-index: 1000;
+
+  &__logo {
+    @include mixins.height(vars.$spacing-xxx-micro);
+  }
+
+  &__item {
+    @include mixins.flexArea(row, center, start);
+  }
 }

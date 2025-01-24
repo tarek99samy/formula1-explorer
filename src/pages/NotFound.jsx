@@ -3,10 +3,10 @@ import { Button } from 'primereact/button';
 
 export default function NotFound() {
   return (
-    <main className='flex flex-column align-items-center justify-content-center text-center p-4 h-screen'>
-      <img src='/404.svg' alt='Page Not Found' className='w-4' />
-      <h1>Page Not Found</h1>
-      <h2>Sorry, the page you are looking for does not exist.</h2>
+    <main className='generic-page-container'>
+      <img src='/404.svg' alt='Page Not Found' className='generic-page-image' />
+      <h1 className='generic-page-title'>Page Not Found</h1>
+      <p className='generic-page-description'>Sorry, the page you are looking for does not exist.</p>
       <Link to='/'>
         <Button label='Go back to Home' />
       </Link>

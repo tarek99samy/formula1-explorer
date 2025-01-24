@@ -5,6 +5,8 @@ const useUserPreferenceStore = create(
   persist(
     (set) => ({
       pinnedRaces: {},
+      currentDrivers: [],
+      setCurrentDrivers: (drivers) => set({ currentDrivers: drivers }),
       addPinnedRace: (season, race) =>
         set((state) => {
           const updatedPinnedRaces = { ...state.pinnedRaces };

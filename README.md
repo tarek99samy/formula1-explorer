@@ -1,4 +1,4 @@
-# [Formula 1 Explorer](https://formula1-explorer.vercel.app/)
+# Formula 1 Explorer
 
 This is a Formula 1 Explorer website that allows users to explore various aspects of Formula 1 racing, including drivers, teams, and race results. The website is built using modern web technologies to ensure a fast and mobile-first responsive user experience.
 
@@ -6,12 +6,13 @@ This is a Formula 1 Explorer website that allows users to explore various aspect
 
 - **React**: A JavaScript library for building user interfaces.
 - **Vite**: A build tool that provides a fast development environment with Hot Module Replacement (HMR).
-- **PrimeReact**: A rich open-source UI components for React applications. It comes along with **PrimeFlex** for ready-use CSS classes
+- **PrimeReact**: A rich open-source UI components for React applications.
 - **SASS**: A preprocessor scripting language that is interpreted or compiled into CSS.
 - **React Query**: A library for fetching, caching, and updating asynchronous data in React applications.
 - **Zustand**: A small, fast, and scalable state management library for React applications.
 - **ESLint**: A tool for identifying and fixing problems in JavaScript code.
 - **Babel**: A JavaScript compiler that allows you to use next-generation JavaScript.
+- **Vitest**: A testing framework for JavaScript applications that provides a fast and enjoyable testing experience.
 
 ## Setup
 
@@ -53,4 +54,12 @@ To lint the codebase using ESLint, run:
 
 ```sh
 npm run lint
+```
+
+## Testing
+
+To run tests using Vitest, run:
+
+```sh
+npm run test
 ```

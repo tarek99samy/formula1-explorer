@@ -9,7 +9,7 @@ import { Toast } from 'primereact/toast';
 import Card from './Card';
 import LoadingSkeleton from './LoadingSkeleton';
 import Error from './Error';
-import { viewTypeClassName, CardsListViewTypes } from '../utils/components/CardsList.utils';
+import { CardsListViewTypes } from '../utils/components/CardsList.utils';
 
 CardsList.propTypes = {
   title: PropTypes.string.isRequired,
@@ -70,11 +70,11 @@ export default function CardsList({
   }
 
   return (
-    <main className='flex flex-column gap-3 w-full'>
+    <main className='cardslist'>
       <Toast ref={toast} />
-      <div className='flex flex-column md:flex-row justify-content-between'>
-        <h1 className='text-white'>{title}</h1>
-        <div className='flex align-items-center gap-3'>
+      <div className='cardslist__header'>
+        <h1 className='cardslist__header__title'>{title}</h1>
+        <div className='cardslist__header__actions'>
           {canHeighlight && (
             <MultiSelect value={selectedIds} onChange={handleChangeHeighlight} options={highlighOptions} placeholder='Select to highlight' />
           )}
@@ -88,16 +88,24 @@ export default function CardsList({
           />
         </div>
       </div>
-      <div className={viewTypeClassName[currentViewType].parent}>
+      <div className={`cardslist__body cardslist__body--${currentViewType}`}>
         {isLoading ? (
           <LoadingSkeleton />
         ) : (
-          data?.MRData?.data.map((item) => <Card key={item.id} className={viewTypeClassName[currentViewType].child} haveFooter={canPin} {...item} />)
+          data?.MRData?.data.map((item) => (
+            <Card
+              key={item.id}
+              className={`cardslist__body__item--${currentViewType}`}
+              isHeighlighted={selectedIds.includes(item.id)}
+              haveFooter={canPin}
+              {...item}
+            />
+          ))
         )}
       </div>
       {showLoadMore ? (
-        <div className='flex justify-content-center pt-5'>
-          <Button label='Load More' icon='pi pi-refresh' className='w-10 md:w-5 lg:w-4' onClick={handleLoadMore} />
+        <div className='cardslist__footer'>
+          <Button label='Load More' icon='pi pi-refresh' className='cardslist__footer__button' onClick={handleLoadMore} />
         </div>
       ) : null}
     </main>

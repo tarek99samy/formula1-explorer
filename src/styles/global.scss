@@ -2,9 +2,9 @@
 @use './mixins' as mixins;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: white;
-  background-color: #242424;
+  font-family: vars.$text-family;
+  color: vars.$color-text-primary;
+  background-color: vars.$color-bg;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -33,4 +33,37 @@ a {
 
 a:hover {
   text-decoration: none;
+}
+
+.p-multiselect {
+  max-width: vars.$card-button-max-width !important;
+}
+
+.page-container {
+  @include mixins.flexArea(column, center, center);
+  @include mixins.height(100%);
+  @include mixins.padding(vars.$spacing-small, vars.$spacing-micro-increased);
+  @include mixins.x-responsive-padding(vars.$spacing-xxx-micro, vars.$spacing-micro-x, vars.$spacing-small);
+}
+
+.generic-page-container {
+  @include mixins.flexArea(column, center, center);
+  @include mixins.height(100vh);
+  @include mixins.width(100%);
+  @include mixins.padding(vars.$spacing-atomic-xx, vars.$spacing-x-atomic);
+  @include mixins.text-align(center);
+
+  .generic-page-image {
+    @include mixins.margin(vars.$spacing-atomic-xx, vars.$spacing-x-atomic);
+    @include mixins.responsive-width(100%, 70%, 50%, 40%);
+  }
+
+  .generic-page-title {
+    @include mixins.text(vars.$color-text-primary, vars.$text-size-medium, vars.$text-weight-bold, vars.$text-size-medium);
+    @include mixins.responsive-text(vars.$text-size-small, vars.$text-size-medium, vars.$text-size-medium-x, vars.$text-size-large);
+  }
+
+  .generic-page-description {
+    @include mixins.text(vars.$color-text-primary, vars.$text-size-micro, vars.$text-weight-normal, vars.$text-size-medium);
+  }
 }

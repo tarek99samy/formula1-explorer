@@ -34,7 +34,7 @@ const renderCardBody = (bodyItem, index) => {
       );
     case 'url':
       return (
-        <Link key={index} to={bodyItem.url} className='card__body__item underline'>
+        <Link key={index} to={bodyItem.url} className='card__body__item card__body__item--url'>
           {bodyItem.content}
         </Link>
       );
@@ -73,7 +73,7 @@ export default function Card({
               label='Unpin'
               icon='pi pi-thumbtack'
               onClick={() => footerMetadata.removePreference()}
-              className='w-full lg:w-11 xl:w-full max-w-18rem'
+              className='card__footer__button'
               severity='secondary'
             />
           ) : (
@@ -81,12 +81,12 @@ export default function Card({
               label='Pin'
               icon='pi pi-thumbtack'
               onClick={() => footerMetadata.savePreference()}
-              className='w-full lg:w-11 xl:w-full max-w-18rem'
+              className='card__footer__button'
               severity='danger'
             />
           ))}
-        <Link to={detailsUrl} className=''>
-          <Button label='Learn More' icon='pi pi-eye' className='w-full lg:w-11 xl:w-full max-w-18rem' severity='secondary'></Button>
+        <Link to={detailsUrl} className='card__footer__button--wrapper'>
+          <Button label='Learn More' icon='pi pi-eye' className='card__footer__button' severity='secondary'></Button>
         </Link>
       </div>
     </div>
