@@ -1,7 +1,7 @@
 import { Skeleton } from 'primereact/skeleton';
 
 const SkeletonCard = () => (
-  <div className='w-4 border-round border-1 surface-border p-4 surface-card'>
+  <div className='w-4 border-round border-1 surface-border p-4 surface-card' data-testid='skeleton-card'>
     <div className='flex flex-column mb-3'>
       {Array(3)
         .fill(0)

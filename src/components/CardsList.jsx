@@ -84,6 +84,7 @@ export default function CardsList({
             itemTemplate={renderToggleViewButton}
             optionLabel='value'
             options={CardsListViewTypes}
+            data-testid='toggle-view-type'
           />
         </div>
       </div>

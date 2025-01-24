@@ -60,7 +60,7 @@ export default function Card({
   footerMetadata = {}
 }) {
   return (
-    <div className={`${className} card ${isHeighlighted && 'card--heighlighted'}`}>
+    <div className={`${className} card ${isHeighlighted && 'card--heighlighted'}`} data-testid='card'>
       <div className='card__header'>
         <span className='card__title'>{title}</span>
         <span className='card__subtitle'>{subtitle}</span>

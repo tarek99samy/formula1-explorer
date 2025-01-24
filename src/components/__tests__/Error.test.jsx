@@ -1,18 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { expect, it } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
-import Navbar from '../Navbar';
+import Error from '../Error';
 
-it('should renders Navbar component correctly', () => {
+it('should renders Error component correctly', () => {
   render(
     <BrowserRouter>
-      <Navbar />
+      <Error />
     </BrowserRouter>
   );
-  let message = screen.getByText(/Seasons/i);
+  let message = screen.getByText(/Unexpected Error/i);
   expect(message).toBeVisible();
-  message = screen.getByText(/Latest Races of 2024/i);
+  message = screen.getByText(/Something went wrong, please try again/i);
   expect(message).toBeVisible();
-  message = screen.getByText(/Latest Race Results/i);
+  message = screen.getByText(/Go back to Home/i);
   expect(message).toBeVisible();
 });

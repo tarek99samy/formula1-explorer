@@ -21,7 +21,7 @@ const renderChart = (chartObject, index, data) => {
     return null;
   }
   return (
-    <div className='w-full my-3' key={chartObject.data.datasets[0].label}>
+    <div className='w-full my-3' key={chartObject.data.datasets[0].label} data-testid='performance-modal-chart'>
       <span className='text-lg'>{chartObject.data.datasets[0].label}</span>
       <Chart type={chartObject.type} data={chartObject.data} options={chartObject.options} />
       {index !== data.length - 1 && <Divider />}
@@ -52,7 +52,7 @@ function PerformanceModal({ visible, setVisible, queryKey, queryFunction, queryF
         resizable={false}
       >
         <div className='flex flex-column justify-content-center gap-3 w-full'>
-          {isLoading ? <ProgressSpinner /> : data.map((item, index) => renderChart(item, index, data))}
+          {isLoading ? <ProgressSpinner data-testid='performance-modal-spinner' /> : data.map((item, index) => renderChart(item, index, data))}
         </div>
       </Dialog>
     </>
